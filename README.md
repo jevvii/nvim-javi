@@ -31,7 +31,7 @@ mv ~/.config/nvim ~/.config/nvim.bak
 **Clone:** Clone this repository into your Neovim config directory:
 
 ```bash
-git clone https://github.com/<your-username>/nvim-config.git ~/.config/nvim
+git clone https://github.com/jevvii/nvim-javi ~/.config/nvim
 ```
 
 **Launch:** Open Neovim, and lazy.nvim will handle the rest:
