@@ -3,7 +3,7 @@ return {
     build = ":TSUpdate",
     config = function()
         local config = require("nvim-treesitter.configs")
-       config.setup({
+        config.setup({
             auto_install = true,
             sync_install = false,
             highlight = {
@@ -13,8 +13,7 @@ return {
             indent = {
                 enable = true,
             },
-            ensure_installed = { "c", "cpp", "python", "lua", "html", "javascript" },  -- List parsers you want
+            ensure_installed = { "c", "cpp", "python", "lua", "html", "javascript", "java" }, -- List parsers you want
         })
-    end
+    end,
 }
-

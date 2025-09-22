@@ -6,6 +6,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+
 keymap.set("n", "x", '"_x')
 
 keymap.set("n", "+", "<C-a>")
@@ -17,6 +18,7 @@ keymap.set("n", "<leader>w", ":wa<Return>", opts)
 keymap.set("n", "<leader>c", ":quit<Return>", opts)
 keymap.set("n", "<leader>s", ":wqa<Return>", opts)
 keymap.set("n", "<leader>hc", ":qa!<Return>", opts)
+keymap.set("n", "m", ":wa!<Return>", opts)
 
 --NvimTree
 keymap.set("n", "<leader>q", ":NvimTreeToggle<Return>", opts)
