@@ -58,3 +58,20 @@ end, opts)
 -- Copilot
 vim.keymap.set("n", "<leader>cp", ":Copilot toggle<CR>", { desc = "Toggle Copilot" })
 vim.keymap.set("n", "<leader>cs", ":Copilot status<CR>", { desc = "Copilot status" })
+
+-- Move highlighted lines (Lift/Grab)
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Stay in visual mode after indenting
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+-- Keep cursor in place when joining lines
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- Keep screen centered when jumping
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
