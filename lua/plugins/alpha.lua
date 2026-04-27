@@ -3,10 +3,6 @@ return {
     "goolord/alpha-nvim",
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
----@diagnostic disable-next-line: duplicate-index
-    config = function ()
-        require("alpha").setup(require("alpha.themes.dashboard").opts)
-    end,
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
         require("alpha.term")

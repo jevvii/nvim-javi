@@ -8,10 +8,10 @@ function ColorKorol()
 
     if mode == "dark" then
         vim.opt.background = "dark"
-        vim.cmd.colorscheme("catppuccin") -- your dark theme
+        vim.cmd.colorscheme("catppuccin-mocha") -- your dark theme
     else
         vim.opt.background = "light"
-        vim.cmd.colorscheme("catppuccin") -- your light theme
+        vim.cmd.colorscheme("catppuccin-mocha") -- your light theme
     end
 
     -- Diagnostic highlights

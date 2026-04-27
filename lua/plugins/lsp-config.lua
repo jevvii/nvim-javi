@@ -1,17 +1,8 @@
---[[
---vim.diagnostic.config({
-    virtual_text = true,  -- Show inline diagnostic messages
-    signs = true,         -- Show signs in the gutter
-    update_in_insert = true, -- Update diagnostics while in insert mode
-    underline = false,    -- Underline problematic text
-    severity_sort = true, -- Sort diagnostics by severity
-})
---]]
 vim.diagnostic.config({
     virtual_text = {
         line_hl = {
-            ["Error"] = "#000000",
-            ["Info"] = "#000000",
+            [vim.diagnostic.severity.ERROR] = "DiagnosticVirtualTextError",
+            [vim.diagnostic.severity.INFO] = "DiagnosticVirtualTextInfo",
         },
     },
     signs = true,
@@ -38,7 +29,6 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
 
             local function get_fqbn()
                 local handle = io.popen("arduino-fqbn")
@@ -50,23 +40,27 @@ return {
                 return (result:gsub("%s+", ""))
             end
 
-            -- Standard setup function
-            local function setup(server, opts)
-                lspconfig[server].setup(vim.tbl_deep_extend("force", {
-                    capabilities = capabilities,
-                }, opts or {}))
-            end
+            -- Configure servers using vim.lsp.config (Neovim 0.11+)
+            -- lspconfig[server].setup() is deprecated and will be removed in v3.0.0
+            vim.lsp.config["lua_ls"] = {
+                cmd = { "lua-language-server" },
+                capabilities = capabilities,
+            }
 
-            setup("lua_ls")
-            setup("ts_ls", {
+            vim.lsp.config["ts_ls"] = {
+                cmd = { "typescript-language-server", "--stdio" },
+                capabilities = capabilities,
                 filetypes = {
                     "javascript",
                     "javascriptreact",
                     "typescript",
                     "typescriptreact",
                 },
-            })
-            setup("pylsp", {
+            }
+
+            vim.lsp.config["pylsp"] = {
+                cmd = { "pylsp" },
+                capabilities = capabilities,
                 settings = {
                     pylsp = {
                         plugins = {
@@ -76,13 +70,20 @@ return {
                         },
                     },
                 },
-            })
-            setup("pyright")
-            setup("clangd", {
+            }
+
+            vim.lsp.config["pyright"] = {
+                cmd = { "pyright-langserver", "--stdio" },
+                capabilities = capabilities,
+            }
+
+            vim.lsp.config["clangd"] = {
                 cmd = { "clangd", "--background-index" },
-                root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
-            })
-            setup("arduino_language_server", {
+                capabilities = capabilities,
+                root_markers = { "compile_commands.json", ".git" },
+            }
+
+            vim.lsp.config["arduino_language_server"] = {
                 cmd = {
                     "arduino-language-server",
                     "-cli-config",
@@ -94,10 +95,27 @@ return {
                     "-fqbn",
                     get_fqbn(),
                 },
+                capabilities = capabilities,
                 filetypes = { "arduino" },
-                root_dir = lspconfig.util.root_pattern(".git"),
+                root_markers = { ".git" },
+            }
+
+            vim.lsp.config["html"] = {
+                cmd = { "vscode-html-language-server", "--stdio" },
+                capabilities = capabilities,
+                filetypes = { "html", "htmldjango" },
+            }
+
+            -- Enable all configured servers
+            vim.lsp.enable({
+                "lua_ls",
+                "ts_ls",
+                "pylsp",
+                "pyright",
+                "clangd",
+                "arduino_language_server",
+                "html",
             })
-            setup("html")
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
