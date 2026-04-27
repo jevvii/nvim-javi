@@ -8,7 +8,6 @@ return {
                 suggestion = { enabled = false },
                 panel = { enabled = false },
             })
-            require("copilot.client").ensure_client_started()
         end,
     },
     {

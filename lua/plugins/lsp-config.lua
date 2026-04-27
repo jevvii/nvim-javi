@@ -9,13 +9,13 @@
 --]]
 vim.diagnostic.config({
     virtual_text = {
-        line_hl = { -- new
+        line_hl = {
             ["Error"] = "#000000",
             ["Info"] = "#000000",
         },
     },
-    signs = true, -- Show signs in the gutter
-    severity_sort = true, -- Sort diagnostics by severity
+    signs = true,
+    severity_sort = true,
 })
 
 return {
@@ -38,6 +38,7 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local lspconfig = require("lspconfig")
 
             local function get_fqbn()
                 local handle = io.popen("arduino-fqbn")
@@ -49,11 +50,11 @@ return {
                 return (result:gsub("%s+", ""))
             end
 
+            -- Standard setup function
             local function setup(server, opts)
-                vim.lsp.config(server, vim.tbl_deep_extend("force", {
+                lspconfig[server].setup(vim.tbl_deep_extend("force", {
                     capabilities = capabilities,
                 }, opts or {}))
-                vim.lsp.enable(server)
             end
 
             setup("lua_ls")
@@ -79,7 +80,7 @@ return {
             setup("pyright")
             setup("clangd", {
                 cmd = { "clangd", "--background-index" },
-                root_markers = { "compile_commands.json", ".git" },
+                root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
             })
             setup("arduino_language_server", {
                 cmd = {
@@ -94,11 +95,9 @@ return {
                     get_fqbn(),
                 },
                 filetypes = { "arduino" },
-                root_markers = { ".git" },
+                root_dir = lspconfig.util.root_pattern(".git"),
             })
-            setup("html", {
-                filetypes = { "html" },
-            })
+            setup("html")
 
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
