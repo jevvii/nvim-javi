@@ -28,11 +28,7 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         opts = {
-            automatic_enable = {
-                exclude = {
-                    "jdtls",
-                },
-            },
+            automatic_enable = false,
         },
     },
     {
@@ -42,25 +38,37 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
+
+            local function get_fqbn()
+                local handle = io.popen("arduino-fqbn")
+                if not handle then
+                    return "arduino:avr:uno"
+                end
+                local result = handle:read("*a")
+                handle:close()
+                return (result:gsub("%s+", ""))
+            end
+
+            local function setup(server, opts)
+                vim.lsp.config(server, vim.tbl_deep_extend("force", {
+                    capabilities = capabilities,
+                }, opts or {}))
+                vim.lsp.enable(server)
+            end
+
+            setup("lua_ls")
+            setup("ts_ls", {
+                filetypes = {
+                    "javascript",
+                    "javascriptreact",
+                    "typescript",
+                    "typescriptreact",
+                },
             })
-            lspconfig.ts_ls.setup({
-                capabilities = capabilities,
-            })
-            lspconfig.pylsp.setup({
-                capabilities = capabilities,
+            setup("pylsp", {
                 settings = {
                     pylsp = {
                         plugins = {
-                            -- Code linters and checkers
-                            pycodestyle = { enabled = true },
-                            flake8 = { enabled = true },
-                            pylint = { enabled = true },
-                            pyls_black = { enabled = true },
-
-                            -- Code formatting
                             autopep8 = { enabled = true },
                             yapf = { enabled = false },
                             black = { enabled = false },
@@ -68,39 +76,30 @@ return {
                     },
                 },
             })
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
+            setup("pyright")
+            setup("clangd", {
                 cmd = { "clangd", "--background-index" },
-                root_dir = function(fname)
-                    -- Ensure it finds compile_commands.json
-                    return lspconfig.util.root_pattern("compile_commands.json", ".git")(fname)
-                end,
+                root_markers = { "compile_commands.json", ".git" },
             })
-            lspconfig.html.setup({
-                capabilities = capabilities,
+            setup("arduino_language_server", {
+                cmd = {
+                    "arduino-language-server",
+                    "-cli-config",
+                    "/home/javvii/.arduino15/arduino-cli.yaml",
+                    "-cli",
+                    "/usr/bin/arduino-cli",
+                    "-clangd",
+                    "/usr/bin/clangd",
+                    "-fqbn",
+                    get_fqbn(),
+                },
+                filetypes = { "arduino" },
+                root_markers = { ".git" },
+            })
+            setup("html", {
+                filetypes = { "html" },
             })
 
-            lspconfig.emmet_ls.setup({
-                capabilities = capabilities,
-                filetypes = {
-                    "html",
-                    "css",
-                    "javascript",
-                    "javascriptreact",
-                    "typescriptreact",
-                    "svelte",
-                    "vue",
-                    "astro",
-                    "ejs",
-                },
-                init_options = {
-                    html = {
-                        options = {
-                            ["bem.enabled"] = true, -- Optional: enable BEM-style class suggestions
-                        },
-                    },
-                },
-            })
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})

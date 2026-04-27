@@ -1,23 +1,3 @@
---[[return {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",  -- Ensure devicons are listed here
-        "MunifTanjim/nui.nvim",
-    },
-    config = function()
-        require("neo-tree").setup({
-            filesystem = {
-                filtered_items = {
-                    hide_dotfiles = false,  -- Show dotfiles if you want
-                },
-            },
-        })
-        vim.keymap.set("n", "<leader>q", ":Neotree filesystem reveal left<CR>", {})
-    end
-}--]]
-
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
@@ -58,10 +38,11 @@ return {
                 group_empty = true,
             },
             filters = {
-                dotfiles = true,
+                dotfiles = false,
                 custom = {
                     "node_modules/.*",
                 },
+                exclude = { ".env" },
             },
             log = {
                 enable = true,

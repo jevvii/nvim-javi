@@ -13,7 +13,7 @@ return {
             indent = {
                 enable = true,
             },
-            ensure_installed = { "c", "cpp", "python", "lua", "html", "javascript", "java" }, -- List parsers you want
+            ensure_installed = { "c", "cpp", "python", "lua", "html", "javascript", "java", "regex" }, -- List parsers you want
         })
     end,
 }
