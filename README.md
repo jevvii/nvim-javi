@@ -1,86 +1,67 @@
-# 🚀 Neovim Config: Minimal, Fast, Aesthetic
-
-A modern Neovim configuration focused on speed, transparency, and a seamless developer experience. Built with a focus on a clean UI and intuitive movement.
-
----
-
-## ✨ Features
-
-- **🎨 Themes:** Beautiful **Catppuccin** integration with native transparency support.
-- **⚡ Fast Performance:** Plugin management via **lazy.nvim** for near-instant startup.
-- **👁️ Clean UI:**
-    - **Noice.nvim** for a modern cmdline and notification experience.
-    - **Bufferline** for elegant tab/buffer management.
-    - **Incline.nvim** for floating status indicators.
-    - **Nvim-Tree** for efficient file exploration.
-- **🛠️ Development Power:**
-    - **LSP & Mason:** Easy management of language servers.
-    - **Conform.nvim:** Fast, reliable formatting on save.
-    - **Treesitter:** Superior syntax highlighting and indentation.
-    - **Telescope:** Powerful fuzzy finding and navigation.
-    - **Copilot:** AI-powered completion ready to go.
+# nvim-javi
+*A minimalist, high-performance Neovim environment designed for transparency and fluid movement.*
 
 ---
 
-## ⌨️ Keybindings (Pro Productivity)
+## Design Philosophy
+This configuration is built for developers who prioritize a clean workspace without sacrificing modern power. It leverages Neovim's native capabilities alongside a curated selection of tools to provide a responsive, aesthetically consistent environment.
 
-### 📦 Movement & Editing
-| Shortcut | Action |
+### Core Components
+- **Interface**: Transparent Catppuccin integration with floating status indicators (Incline) and a modern command-line (Noice).
+- **Navigation**: Intelligent fuzzy finding via Telescope and a minimalist tree explorer.
+- **Development**: Native LSP management, high-performance formatting via Conform, and AI-assisted completion with Copilot.
+- **Productivity**: Specialized movement keybindings designed for a "centered" focus.
+
+---
+
+## Strategic Keybindings
+
+### Global Operations
+| Mapping | Description |
 | :--- | :--- |
-| `<leader>pf` | Find files with Telescope |
-| `<leader>gr` | Live Grep across project |
-| `J` (Visual) | **Lift/Grab:** Move highlighted block DOWN |
-| `K` (Visual) | **Lift/Grab:** Move highlighted block UP |
-| `J` (Normal) | Join lines while keeping cursor in place |
-| `<C-d>` / `<C-u>` | Scroll down/up and keep screen centered |
-| `n` / `N` | Jump to next/prev search result and center screen |
-| `>` / `<` | Indent/Unindent while staying in visual selection |
+| `leader pf` | Fuzzy find files |
+| `leader gr` | Live grep through workspace |
+| `leader q` | Toggle file explorer |
+| `tab` / `S-tab` | Cycle through active buffers |
+| `sh / sj / sk / sl` | Navigate split windows |
 
-### 📂 Navigation
-| Shortcut | Action |
+### Structural Editing
+| Mapping | Description |
 | :--- | :--- |
-| `<leader>q` | Toggle Nvim-Tree Explorer |
-| `<Tab>` | Cycle to next buffer |
-| `<S-Tab>` | Cycle to previous buffer |
-| `sh/sj/sk/sl` | Move between splits (h, j, k, l) |
-| `<leader>w` | Save all buffers |
+| `J` (Visual) | **Lift**: Move selected block down (auto-indent) |
+| `K` (Visual) | **Lift**: Move selected block up (auto-indent) |
+| `>` / `<` (Visual) | Persistent indentation (keeps selection) |
+| `J` (Normal) | In-place line joining (preserves cursor position) |
+
+### Focused Navigation
+| Mapping | Description |
+| :--- | :--- |
+| `ctrl-d` / `ctrl-u` | Vertical scroll with screen centering |
+| `n` / `N` | Search navigation with screen centering |
 
 ---
 
-## 🛠️ Installation
+## Quick Installation
 
-### 1. Backup Existing Config
 ```bash
+# 1. Prepare environment
 mv ~/.config/nvim ~/.config/nvim.bak
-```
 
-### 2. Clone Repository
-```bash
-git clone https://github.com/jevvii/nvim-javi ~/.config/nvim
-```
+# 2. Deploy configuration
+git clone git@github.com:jevvii/nvim-javi.git ~/.config/nvim
 
-### 3. Launch & Auto-Install
-```bash
+# 3. Initialize
 nvim
 ```
-*Plugins and LSPs will install automatically on the first run.*
+*Plugins and language servers will bootstrap automatically upon first launch.*
 
 ---
 
-## 📋 Dependencies
-
-- **Neovim v0.10+** (v0.12+ recommended)
-- **Nerd Fonts** (required for icons)
-- **External Tools:** `ripgrep`, `fd`, `git`, `make`, `gcc` (for treesitter/telescope)
-
----
-
-## 🌸 Troubleshooting
-
-- **Missing Icons?** Ensure you are using a [Nerd Font](https://www.nerdfonts.com/).
-- **Cursor Issues?** The config includes a `VimLeave` reset. Ensure your terminal supports cursor shape escape codes.
-- **Formatting not working?** Run `:checkhealth conform` to ensure formatters like `prettier` or `stylua` are installed via Mason or your system.
+## Technical Requirements
+- **Neovim 0.10+** (0.12 recommended)
+- **Nerd Font** (e.g., JetBrainsMono, Iosevka)
+- **System Dependencies**: `ripgrep`, `fd`, `gcc`, `make`
 
 ---
 
-**License:** MIT | **Maintained by:** [Javvii](https://github.com/jevvii)
+*MIT License | [Javvii](https://github.com/jevvii)*
