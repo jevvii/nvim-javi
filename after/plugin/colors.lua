@@ -24,6 +24,16 @@ function ColorKorol()
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+    -- Make line numbers and gutter transparent
+    vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
+    vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+    vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none" })
+    vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+    vim.api.nvim_set_hl(0, "CursorLineSign", { bg = "none" })
+    vim.api.nvim_set_hl(0, "CursorLineFold", { bg = "none" })
+
     -- Make NvimTree transparent
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
@@ -67,6 +77,14 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         vim.api.nvim_set_hl(0, "Cursor", { reverse = true })
         vim.api.nvim_set_hl(0, "lCursor", { reverse = true })
         vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2a2a2a" })
+        -- Re-apply transparent line numbers and gutter on scheme change
+        vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+        vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
+        vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+        vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none" })
+        vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+        vim.api.nvim_set_hl(0, "CursorLineSign", { bg = "none" })
+        vim.api.nvim_set_hl(0, "CursorLineFold", { bg = "none" })
     end,
 })
 
