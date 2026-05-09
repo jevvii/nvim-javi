@@ -38,14 +38,14 @@
 | `te` | n | New tab (`:tabedit`) |
 | `<Tab>` | n | Next tab |
 | `<S-Tab>` | n | Previous tab |
-| `sh` | n | Move to left split |
-| `sj` | n | Move to down split |
-| `sk` | n | Move to up split |
-| `sl` | n | Move to right split |
-| `<C-S-h>` | n | Shrink split width |
-| `<C-S-l>` | n | Grow split width |
-| `<C-S-k>` | n | Grow split height |
-| `<C-S-j>` | n | Shrink split height |
+| `<C-h>` | n | Move to left split |
+| `<C-j>` | n | Move to down split |
+| `<C-k>` | n | Move to up split |
+| `<C-l>` | n | Move to right split |
+| `<M-h>` | n | Shrink split width |
+| `<M-l>` | n | Grow split width |
+| `<M-k>` | n | Grow split height |
+| `<M-j>` | n | Shrink split height |
 
 ---
 
@@ -99,7 +99,8 @@
 | `K` | n | Hover documentation |
 | `gd` | n | Go to definition |
 | `<leader>ca` | n, v | Code actions (fixes, imports, etc.) |
-| `<C-j>` | n | Jump to next diagnostic |
+| `]d` | n | Jump to next diagnostic |
+| `[d` | n | Jump to previous diagnostic |
 
 **Diagnostics:**
 - Shown inline with `virtual_text`

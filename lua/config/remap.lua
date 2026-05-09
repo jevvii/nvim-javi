@@ -41,22 +41,23 @@ keymap.set("n", "<tab>", ":tabnext<CR>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<CR>", opts)
 keymap.set("n", "tw", ":bd<CR>", opts)
 
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
+-- Window Navigation (Handled by christoomey/vim-tmux-navigator)
 
 -- Window Splits
 keymap.set("n", "<leader>v", ":vsplit<Return>", opts)
 keymap.set("n", "<leader>h", ":split<Return>", opts)
 
-keymap.set("n", "<C-S-h>", "<C-w><")
-keymap.set("n", "<C-S-l>", "<C-w>>")
-keymap.set("n", "<C-S-k>", "<C-w>+")
-keymap.set("n", "<C-S-j>", "<C-w>-")
+keymap.set("n", "<M-h>", "<C-w><")
+keymap.set("n", "<M-l>", "<C-w>>")
+keymap.set("n", "<M-k>", "<C-w>+")
+keymap.set("n", "<M-j>", "<C-w>-")
 
-keymap.set("n", "<C-j>", function()
+-- Diagnostics
+keymap.set("n", "]d", function()
     vim.diagnostic.goto_next()
+end, opts)
+keymap.set("n", "[d", function()
+    vim.diagnostic.goto_prev()
 end, opts)
 
 -- Copilot
