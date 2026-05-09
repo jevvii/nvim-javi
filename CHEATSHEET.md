@@ -31,6 +31,8 @@
 | `<leader>c` | n | Quit current window |
 | `<leader>s` | n | Write all & quit all (`:wqa`) |
 | `<leader>hc` | n | Force quit all (`:qa!`) |
+| `<leader>v` | n | Vertical split (`:vsplit`) |
+| `<leader>h` | n | Horizontal split (`:split`) |
 | `<leader>m` | n | Write all force (`:wa!`) |
 | `tw` | n | Close buffer (`:bd`) |
 | `te` | n | New tab (`:tabedit`) |
@@ -248,6 +250,8 @@ Works in: `html`, `css`, `javascript`, `typescriptreact`, `javascriptreact`
 | Move lines in visual | `J` / `K` |
 | Save everything | `<leader>w` |
 | Quit forcefully | `<leader>hc` |
+| Vertical split | `<leader>v` |
+| Horizontal split | `<leader>h` |
 | Open new tab | `te` |
 
 ---

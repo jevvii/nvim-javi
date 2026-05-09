@@ -46,6 +46,10 @@ keymap.set("n", "sk", "<C-w>k")
 keymap.set("n", "sj", "<C-w>j")
 keymap.set("n", "sl", "<C-w>l")
 
+-- Window Splits
+keymap.set("n", "<leader>v", ":vsplit<Return>", opts)
+keymap.set("n", "<leader>h", ":split<Return>", opts)
+
 keymap.set("n", "<C-S-h>", "<C-w><")
 keymap.set("n", "<C-S-l>", "<C-w>>")
 keymap.set("n", "<C-S-k>", "<C-w>+")
