@@ -31,7 +31,7 @@ Ensure you have [Neovim 0.10+](https://github.com/neovim/neovim/releases) and a 
 mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null
 
 # 2. Clone repository
-git clone git@github.com:jevvii/nvim-javi.git ~/.config/nvim
+git clone https://github.com/jevvii/nvim-javi.git ~/.config/nvim
 
 # 3. Launch (Plugins & LSPs will auto-install)
 nvim
